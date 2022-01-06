@@ -1,11 +1,13 @@
 package com.training.core.basic_java_app;
 
+import java.util.Scanner;
+
 public class Assignment7 {
 
 	public void luckyNumber(int n) {
 		int sum;
 		sum = sumOfDigit(n);
-		System.out.println("Lucky Number is - " + sum);
+		System.out.println("Lucky Number of this number - " + sum);
 	}
 
 	public int sumOfDigit(int n) {
@@ -27,7 +29,12 @@ public class Assignment7 {
 	}
 
 	public static void main(String[] args) {
+		int number;
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter a number : ");
+		number = Integer.parseInt(sc.next());
+		sc.close();
 		Assignment7 a = new Assignment7();
-		a.luckyNumber(273541869);
+		a.luckyNumber(number);
 	}
 }
