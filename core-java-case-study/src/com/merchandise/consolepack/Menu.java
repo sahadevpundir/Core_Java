@@ -24,38 +24,74 @@ public class Menu {
 			System.out.println("5 - Exit");
 			Scanner sc = new Scanner(System.in);
 			System.out.printf("Enter your choice : ");
-			int choice = Integer.parseInt(sc.next());
-			
+			int choice = 0;
+			try {
+				choice = Integer.parseInt(sc.next());
+			} catch (NumberFormatException e) {
+				System.err.println("Only numeric choice allowed");
+			}
+
 			// Main menu selection
 			switch (choice) {
 			case 1: {
-				// Add Customer
+				// Add Customers
+				int number = 0;
+				String st;
 				System.out.printf("How many customer you want to add : ");
-				int number = Integer.parseInt(sc.next());
+				try {
+					number = Integer.parseInt(sc.next());
+				} catch (NumberFormatException e) {
+					System.err.println("Only numeric choice allowed");
+				}
+
 				if (number > 0 && number < 6) {
 					for (int i = 1; i <= number; i++) {
-						System.out.printf("Enter details for %d customer\n", i);
+						switch (i) {
+						case 1: {
+							st = "st";
+							break;
+						}
+						case 2: {
+							st = "nd";
+							break;
+						}
+						case 3: {
+							st = "rd";
+							break;
+						}
+						case 4: {
+							st = "th";
+							break;
+						}
+						case 5: {
+							st = "th";
+							break;
+						}
+						default:
+							st = "th";
+						}
+						System.out.printf("Enter details for %d%s customer\n", i, st);
 						System.out.printf("Enter customer ID : ");
 						int partnerId = sc.nextInt();
-						System.out.println("Enter customer name ");
+						System.out.printf("Enter customer name : ");
 						String partnerName = sc.next();
-						System.out.println("Enter city ");
+						System.out.printf("Enter city : ");
 						String city = sc.next();
-						System.out.println("Enter state ");
+						System.out.printf("Enter state : ");
 						String state = sc.next();
-						System.out.println("Enter ammount ");
+						System.out.printf("Enter amount : ");
 						long creditLimit = Long.parseLong(sc.next());
-						System.out.println("Enter phone number ");
+						System.out.printf("Enter phone number : ");
 						String phoneNumber = sc.next();
-						System.out.println("Enter email ");
+						System.out.printf("Enter email : ");
 						String email = sc.next();
 
 						Customer c = new Customer(partnerId, partnerName, city, state, creditLimit, phoneNumber, email);
 						String[] val = c.validate();
 						boolean flag = true;
 						for (String sr : val) {
-							System.out.printf("%s, ", sr);
-							if (sr.contains("not")) {
+							if (sr.contains("not valid")) {
+								System.out.printf("%s, ", sr);
 								flag = false;
 							}
 						}
@@ -63,33 +99,65 @@ public class Menu {
 						if (flag) {
 							s.saveCustomerDetails(c);
 							System.out.println("Customer added succesfully");
+						} else {
+							System.err.println("Sorry can't add");
 						}
 					}
 				} else {
-					System.out.println("Customer could be neighter negative nor more than 5");
+					System.err.println("Customer couldn't be negative, 0 and more than 5");
 				}
 				System.out.println("+-------------------------------------+");
 				break;
 			}
 			case 2: {
-				// Add Supplier
+				// Add Suppliers
+				int number = 0;
+				String st;
 				System.out.printf("How many supplier you want to add : ");
-				int number = Integer.parseInt(sc.next());
+				try {
+					number = Integer.parseInt(sc.next());
+				} catch (NumberFormatException e) {
+					System.err.println("Only numeric choice allowed");
+				}
+
 				if (number > 0 && number < 6) {
 					for (int i = 1; i <= number; i++) {
-						// Add supplier
-						System.out.printf("Enter details for %d Supplier\n", i);
+						switch (i) {
+						case 1: {
+							st = "st";
+							break;
+						}
+						case 2: {
+							st = "nd";
+							break;
+						}
+						case 3: {
+							st = "rd";
+							break;
+						}
+						case 4: {
+							st = "th";
+							break;
+						}
+						case 5: {
+							st = "th";
+							break;
+						}
+						default:
+							st = "th";
+						}
+						System.out.printf("Enter details for %d%s Supplier\n", i, st);
 						System.out.printf("Enter Id : ");
 						int partnerId = sc.nextInt();
-						System.out.println("Enter Supplier Name ");
+						System.out.printf("Enter Supplier Name : ");
 						String partnerName = sc.next();
-						System.out.println("Enter City ");
+						System.out.printf("Enter City : ");
 						String city = sc.next();
-						System.out.println("Enter State ");
+						System.out.printf("Enter State : ");
 						String state = sc.next();
-						System.out.println("Enter Credit Balance");
+						System.out.printf("Enter Credit Balance : ");
 						long creditBalance = Long.parseLong(sc.next());
-						System.out.println("Enter Driving Licence Number");
+						System.out.printf("Enter Driving Licence Number : ");
 						String drivingLicenseNumber = sc.next();
 
 						Supplier sup = new Supplier(partnerId, partnerName, city, state, creditBalance,
@@ -97,8 +165,8 @@ public class Menu {
 						String[] val = sup.validate();
 						boolean flag = true;
 						for (String sr : val) {
-							System.out.printf("%s, ", sr);
-							if (sr.contains("not")) {
+							if (sr.contains("not valid")) {
+								System.out.printf("%s, ", sr);
 								flag = false;
 							}
 						}
@@ -106,21 +174,28 @@ public class Menu {
 						if (flag) {
 							s.saveSupplierDetails(sup);
 							System.out.println("Supplier added succesfully");
+						} else {
+							System.err.println("Sorry can't add");
 						}
 					}
 				} else {
-					System.out.println("Supplier could be neighter negative nor more than 5");
+					System.err.println("Supplier couldn't be negative, 0 and more than 5");
 				}
 				System.out.println("+-------------------------------------+");
 				break;
 			}
 			case 3: {
-				// Display Report
+				// Display the Report
 				System.out.println("+---------- Display Report ----------+");
 				System.out.printf("\t1 - Customer\n");
 				System.out.printf("\t2 - Supplier\n");
 				System.out.printf("Enter you choice : ");
-				int ch = Integer.parseInt(sc.next());
+				int ch = 0;
+				try {
+					ch = Integer.parseInt(sc.next());
+				} catch (NumberFormatException e) {
+					System.err.println("Only numeric choice allowed");
+				}
 				if (ch > 0 && ch < 3) {
 					if (ch == 1) {
 						// Display Customers
@@ -148,9 +223,14 @@ public class Menu {
 				break;
 			}
 			case 4: {
-				// Search by ID
+				// Search by ID in customer & supplier
 				System.out.printf("Enter ID for search : ");
-				int id = Integer.parseInt(sc.next());
+				int id = 0;
+				try {
+					id = Integer.parseInt(sc.next());
+				} catch (NumberFormatException e) {
+					System.err.println("ID conains numbers only!");
+				}
 				boolean check = s.getCustomerById(id);
 				if (check) {
 					System.out.println("Found successfully!");
@@ -169,11 +249,11 @@ public class Menu {
 				// Loop termination
 				b = false;
 				sc.close();
-				System.out.println("+------------ Thank You ------------+");
+				System.out.println("+------------- Thank You -------------+");
 				break;
 			}
 			default: {
-					System.out.println("Wrong choice! select again...");
+				System.out.println("Wrong choice! try again...");
 			}
 			}
 		}while(b);
